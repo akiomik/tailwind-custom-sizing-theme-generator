@@ -36,7 +36,7 @@
   {defaultFontSize}
   {actualFontSize}
   {unit}
-  on:customization-change={({ detail }) => updateTheme(detail)}
+  on:customize={({ detail }) => updateTheme(detail)}
 />
 
 <JsonCodeBlock object={config} />
