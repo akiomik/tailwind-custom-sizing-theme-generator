@@ -1,5 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/env';
+  import hljs from 'highlight.js';
+  import 'highlight.js/styles/github-dark.css';
 
   export let object = {};
 
@@ -28,6 +30,6 @@
   </div>
   <code class="block whitespace-pre text-neutral-200 overflow-x-auto">
     <!-- TODO: use json-stable-stringify -->
-    {code}
+    {@html hljs.highlight(code, { language: 'json' }).value}
   </code>
 </div>
