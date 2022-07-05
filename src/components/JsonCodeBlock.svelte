@@ -2,13 +2,30 @@
   import { browser } from '$app/env';
   import hljs from 'highlight.js';
   import 'highlight.js/styles/github-dark.css';
+  import stringify from 'json-stable-stringify';
 
   export let object = {};
 
   let copyLabel = 'Copy';
 
-  // TODO: use json-stable-stringify
-  $: json = JSON.stringify(object, null, 2);
+  // Place string keys at the end
+  type KeyValue = { key: string; value: string };
+  const cmp = (a: KeyValue, b: KeyValue) => {
+    const af = Number.parseFloat(a.key);
+    const bf = Number.parseFloat(b.key);
+
+    if (Number.isNaN(af) && Number.isNaN(bf)) {
+      return a.key > b.key ? 1 : -1;
+    } else if (Number.isNaN(af)) {
+      return 1;
+    } else if (Number.isNaN(bf)) {
+      return -1;
+    } else {
+      return af > bf ? 1 : -1;
+    }
+  };
+
+  $: json = stringify(object, { space: 2, cmp });
   $: highlightedJson = hljs.highlight(json, { language: 'json' }).value;
   $: canCopy = browser && !!window.navigator.clipboard;
 
