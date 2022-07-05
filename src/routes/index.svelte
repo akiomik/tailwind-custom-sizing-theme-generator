@@ -1,23 +1,26 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
-  import ConfigurationForm from '../components/ConfigurationForm.svelte';
+  import CustomizationForm from '../components/CustomizationForm.svelte';
   import JsonCodeBlock from '../components/JsonCodeBlock.svelte';
-  import CustomThemeGenerator from '../helpers/CustomThemeGenerator.mjs';
+  import type { Customization } from '../entities/Customization';
+  import { CustomThemeGenerator } from '../helpers/CustomThemeGenerator';
 
   const config = { theme: {} };
 
-  let defaultFontSize = 16;
-  let actualFontSize = 16;
-  let unit = 'rem';
+  let defaultCustomization: Customization = {
+    defaultFontSize: 16,
+    actualFontSize: 16,
+    unit: 'rem'
+  };
 
-  function updateTheme(customization) {
+  function updateTheme(customization: Customization) {
     const generator = new CustomThemeGenerator(customization);
     config.theme = generator.generate();
   }
 
   onMount(() => {
-    updateTheme({ defaultFontSize, actualFontSize, unit });
+    updateTheme(defaultCustomization);
   });
 </script>
 
@@ -32,11 +35,6 @@
   spacing/sizing scale
 </h1>
 
-<ConfigurationForm
-  {defaultFontSize}
-  {actualFontSize}
-  {unit}
-  on:customize={({ detail }) => updateTheme(detail)}
-/>
+<CustomizationForm {defaultCustomization} on:customize={({ detail }) => updateTheme(detail)} />
 
 <JsonCodeBlock object={config} />

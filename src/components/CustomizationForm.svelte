@@ -1,20 +1,23 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  const dispatch = createEventDispatcher();
+  import { isUnit } from '../entities/Unit';
+  import type { Customization } from '../entities/Customization';
 
-  export let defaultFontSize;
-  export let actualFontSize;
-  export let unit;
+  const dispatch = createEventDispatcher<{ customize: Customization }>();
 
-  $: valid = defaultFontSize > 0 && actualFontSize > 0 && ['rem', 'px'].includes(unit);
+  export let defaultCustomization: Customization;
+  let { defaultFontSize, actualFontSize, unit } = defaultCustomization;
+
+  $: valid = defaultFontSize > 0 && actualFontSize > 0 && isUnit(unit);
+  $: customization = { defaultFontSize, actualFontSize, unit };
 
   const onCustomizationChange = () => {
     if (!valid) {
       return;
     }
 
-    dispatch('customize', { defaultFontSize, actualFontSize, unit });
+    dispatch('customize', customization);
   };
 </script>
 
