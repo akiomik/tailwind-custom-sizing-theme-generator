@@ -1,4 +1,4 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
+import defaultTheme from 'tailwindcss/defaultTheme.js';
 
 import { isUnit } from '../entities/Unit';
 import type { Unit } from '../entities/Unit';
