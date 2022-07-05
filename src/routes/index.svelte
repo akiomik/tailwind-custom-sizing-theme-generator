@@ -16,7 +16,7 @@
 
   function updateTheme(customization: Customization) {
     const generator = new CustomThemeGenerator(customization);
-    config.theme = generator.generate();
+    config.theme = generator.generate().asRecord();
   }
 
   onMount(() => {
