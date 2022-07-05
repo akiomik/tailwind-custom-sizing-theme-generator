@@ -28,7 +28,7 @@
   <title>Tailwind CSS theme generator for customizing spacing/sizing scale</title>
 </svelte:head>
 
-<h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+<h1 class="mb-4 text-4xl font-extrabold tracking-tight sm:text-6xl">
   Tailwind CSS<br />
   theme generator<br />
   for customizing<br />

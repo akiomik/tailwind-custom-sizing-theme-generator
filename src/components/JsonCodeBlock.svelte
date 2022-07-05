@@ -39,13 +39,13 @@
   }
 </script>
 
-<div class="rounded-lg bg-slate-800 p-4 md:p-8 pt-0 md:pt-0">
-  <div class="flex md:items-center justify-end h-4 md:h-8">
+<div class="rounded-lg bg-slate-800 p-4 pt-0 md:p-8 md:pt-0">
+  <div class="flex h-4 justify-end md:h-8 md:items-center">
     {#if canCopy}
-      <button class="w-16 h-8 bg-neutral-200" on:click={onCopyButtonClick}>
+      <button class="h-8 w-16 bg-neutral-200" on:click={onCopyButtonClick}>
         {copyLabel}
       </button>
     {/if}
   </div>
-  <code class="block whitespace-pre text-neutral-200 overflow-x-auto">{@html highlightedJson}</code>
+  <code class="block overflow-x-auto whitespace-pre text-neutral-200">{@html highlightedJson}</code>
 </div>
