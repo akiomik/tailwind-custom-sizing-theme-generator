@@ -5,8 +5,10 @@ export class ThemeProperty {
   isRemProperty(): boolean {
     if (typeof this.value === 'string') {
       return this.value.endsWith('rem');
+    } else if (Array.isArray(this.value)) {
+      return this.value.some((v) => v.endsWith('rem'));
     } else {
-      return false; // TODO: support array-style config
+      return false;
     }
   }
 

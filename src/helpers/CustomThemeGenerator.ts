@@ -50,11 +50,62 @@ export class CustomThemeGenerator {
       return property;
     }
 
-    const rem = Number.parseFloat(property.value);
+    if (typeof property.value === 'string') {
+      return this.convertStringProperty(property);
+    } else if (Array.isArray(property.value)) {
+      return this.convertArrayProperty(property);
+    } else {
+      return property;
+    }
+  }
+
+  private convertStringPropertyValue(value: string): string {
+    const rem = Number.parseFloat(value);
     const px = rem * this.defaultFontSize;
     const converted = this.unit === 'px' ? px : px / this.actualFontSize;
+    return `${converted}${this.unit}`;
+  }
 
-    return new ThemeProperty(property.name, `${converted}${this.unit}`);
+  private convertStringProperty(property: ThemeProperty): ThemeProperty {
+    return new ThemeProperty(property.name, this.convertStringPropertyValue(property.value));
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private convertObjectPropertyValue(value: Record<string, any>): Record<string, any> {
+    const entries = Object.keys(value).map((key) => {
+      const v = value[key];
+
+      if (typeof v === 'string') {
+        return [key, this.convertStringPropertyValue(v)];
+      } else if (Array.isArray(v)) {
+        return [key, this.convertArrayPropertyValue(v)];
+      } else if (typeof v === 'object') {
+        return [key, this.convertObjectPropertyValue(v)];
+      } else {
+        return [key, v];
+      }
+    });
+
+    return Object.fromEntries(entries);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private convertArrayPropertyValue(value: any[]): any[] {
+    return value.map((v) => {
+      if (typeof v === 'string') {
+        return this.convertStringPropertyValue(v);
+      } else if (Array.isArray(v)) {
+        return this.convertArrayPropertyValue(v);
+      } else if (typeof v === 'object') {
+        return this.convertObjectPropertyValue(v);
+      } else {
+        return v;
+      }
+    });
+  }
+
+  private convertArrayProperty(property: ThemeProperty): ThemeProperty {
+    return new ThemeProperty(property.name, this.convertArrayPropertyValue(property.value));
   }
 
   static isObjKey<T>(key: PropertyKey, obj: T): key is keyof T {
