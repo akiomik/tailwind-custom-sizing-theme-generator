@@ -7,7 +7,9 @@
 
   let copyLabel = 'Copy';
 
-  $: code = JSON.stringify(object, null, 2);
+  // TODO: use json-stable-stringify
+  $: json = JSON.stringify(object, null, 2);
+  $: highlightedJson = hljs.highlight(json, { language: 'json' }).value;
   $: canCopy = browser && !!window.navigator.clipboard;
 
   function onCopyButtonClick() {
@@ -15,7 +17,7 @@
       return;
     }
 
-    window.navigator.clipboard.writeText(code);
+    window.navigator.clipboard.writeText(json);
     copyLabel = 'Copied!';
   }
 </script>
@@ -28,8 +30,5 @@
       </button>
     {/if}
   </div>
-  <code class="block whitespace-pre text-neutral-200 overflow-x-auto">
-    <!-- TODO: use json-stable-stringify -->
-    {@html hljs.highlight(code, { language: 'json' }).value}
-  </code>
+  <code class="block whitespace-pre text-neutral-200 overflow-x-auto">{@html highlightedJson}</code>
 </div>
