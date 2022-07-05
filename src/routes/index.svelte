@@ -11,7 +11,7 @@
   let defaultCustomization: Customization = {
     defaultFontSize: 16,
     actualFontSize: 16,
-    unit: 'rem'
+    unit: 'rem',
   };
 
   function updateTheme(customization: Customization) {

@@ -57,7 +57,7 @@ export class CustomThemeGenerator {
       });
 
     return {
-      spacing: Object.fromEntries(spacing)
+      spacing: Object.fromEntries(spacing),
     };
   }
 
