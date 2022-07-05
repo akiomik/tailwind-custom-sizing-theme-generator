@@ -18,7 +18,7 @@
   };
 </script>
 
-<form class="w-[38rem] py-8">
+<form class="md:w-[38rem] py-8">
   <div class="md:flex md:items-center mb-4">
     <label for="default-font-size" class="block md:w-1/4 font-bold">Default font-size:</label>
     <div class="md:w-3/4">
@@ -31,7 +31,11 @@
         bind:value={defaultFontSize}
         on:input={onCustomizationChange}
       />px
-      <span class="invisible peer-invalid:visible text-red-500 ml-2">font-size must be &gt; 0</span>
+      <div
+        class="hidden peer-invalid:block md:peer-invalid:inline text-red-500 mt-2 md:mt-0 md:ml-2"
+      >
+        font-size must be &gt; 0
+      </div>
     </div>
   </div>
 
@@ -47,7 +51,11 @@
         bind:value={actualFontSize}
         on:input={onCustomizationChange}
       />px
-      <span class="invisible peer-invalid:visible text-red-500 ml-2">font-size must be &gt; 0</span>
+      <div
+        class="hidden peer-invalid:block md:peer-invalid:inline text-red-500 mt-2 md:mt-0 md:ml-2"
+      >
+        font-size must be &gt; 0
+      </div>
     </div>
   </div>
 
