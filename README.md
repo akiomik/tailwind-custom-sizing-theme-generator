@@ -1,18 +1,10 @@
-# create-svelte
+# tailwind-custom-sizing-theme-generator
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+[Tailwind CSS](https://tailwindcss.com) theme generator for customizing spacing/sizing scale.
 
-## Creating a project
+- https://tailwind-custom-sizing-theme-generator.vercel.app/
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
+[![screenshot](screenshot.png)](https://tailwind-custom-sizing-theme-generator.vercel.app/)
 
 ## Developing
 
